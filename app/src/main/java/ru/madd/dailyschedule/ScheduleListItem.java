@@ -10,7 +10,7 @@ public class ScheduleListItem {
     private Date startTime;
     private Date endTime;
 
-    public String getTitle() {
+    public int getTitle() {
         return title;
     }
 
