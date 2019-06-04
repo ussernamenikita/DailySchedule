@@ -10,7 +10,7 @@ public class ScheduleListItem {
     private Date startTime;
     private Date endTime;
 
-    public int getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -48,5 +48,18 @@ public class ScheduleListItem {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    /**
+     * Converts time interval to progress value between 0 and 100
+     * For example if {@param currentTime} equals {@link ScheduleListItem#startTime} then return 0
+     * and if {@param currentTime} equals {@link ScheduleListItem#endTime} then return 100
+     *
+     * @param currentTime current time
+     * @return time interval progress from 0 to 100
+     */
+    //TODO implement
+    public int getProgressFromDates(Date currentTime) {
+        return 0;
     }
 }
