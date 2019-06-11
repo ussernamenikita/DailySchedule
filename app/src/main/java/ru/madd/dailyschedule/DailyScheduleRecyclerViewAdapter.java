@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class DailyScheduleRecyclerViewAdapter extends RecyclerView.Adapter<DailyScheduleViewHolder> {
@@ -39,7 +40,11 @@ public class DailyScheduleRecyclerViewAdapter extends RecyclerView.Adapter<Daily
         if (position <= 0 || position >= items.size()) {
             return;
         }
-        holder.bindToItem(items.get(position));
+        try {
+            holder.bindToItem(items.get(position));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

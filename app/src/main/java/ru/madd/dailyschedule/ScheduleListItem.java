@@ -60,6 +60,8 @@ public class ScheduleListItem {
      */
     //TODO implement
     public int getProgressFromDates(Date currentTime) {
+
+
         return 0;
     }
 }
