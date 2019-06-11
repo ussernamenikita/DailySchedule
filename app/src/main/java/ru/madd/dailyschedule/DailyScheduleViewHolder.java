@@ -5,6 +5,10 @@ import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,29 +28,29 @@ public class DailyScheduleViewHolder extends RecyclerView.ViewHolder {
     private TextView dailyScheduleElementTitle;
     //TODO rename all fields like  dailyScheduleElementTitle
     //for more info see(https://www.geeksforgeeks.org/java-naming-conventions/)
-    private TextView Daily_Schedule_Element_Buzz;
-    private TextView Daily_Schedule_Element_Discription;
-    private ProgressBar Daily_Schedule_Element_Prog_Bar;
-    private CheckBox Daily_Schedule_Element_Check;
+    private TextView dailyScheduleElementBuzz;
+    private TextView dailyScheduleElementDescription;
+    private ProgressBar dailyScheduleElementProgBar;
+    private CheckBox dailyScheduleElementCheck;
 
 
     public DailyScheduleViewHolder(@NonNull View itemView) {
         super(itemView);
-        dailyScheduleElementTitle = itemView.findViewById(R.id.text_in_title);
-        Daily_Schedule_Element_Buzz = itemView.findViewById(R.id.text_buzz);
-        Daily_Schedule_Element_Discription = itemView.findViewById(R.id.text_discription);
-        Daily_Schedule_Element_Prog_Bar = itemView.findViewById(R.id.progress_bar);
-        Daily_Schedule_Element_Check = itemView.findViewById(R.id.check_box);
+        dailyScheduleElementTitle = itemView.findViewById(R.id.daily_schedule_element_text_in_title_tv);
+        dailyScheduleElementBuzz = itemView.findViewById(R.id.daily_schedule_element_start_time_tv);
+        dailyScheduleElementDescription = itemView.findViewById(R.id.daily_schedule_element_text_discription_tv);
+        dailyScheduleElementProgBar = itemView.findViewById(R.id.daily_schedule_element_progress_task_pb);
+        dailyScheduleElementCheck = itemView.findViewById(R.id.daily_schedule_element_check_task_cb);
 
     }
 
-    public void bindToItem(ScheduleListItem item){
+    public void bindToItem(ScheduleListItem item) throws ParseException {
         this.currentItem = item;
         this.dailyScheduleElementTitle.setText(item.getTitle());
-        this.Daily_Schedule_Element_Buzz.setText(parseTimeInterval(item));
-        this.Daily_Schedule_Element_Discription.setText(item.getDescription());
-        this.Daily_Schedule_Element_Prog_Bar.setProgress(item.getProgressFromDates(new Date(System.currentTimeMillis())));
-        this.Daily_Schedule_Element_Check.setChecked(item.isTaskDone());// не уверен на счет isTaskDone, но под чек бокс нужен тип boolean выбрал тот что показался логичнее.
+        this.dailyScheduleElementBuzz.setText(parseTimeInterval(item));
+        this.dailyScheduleElementDescription.setText(item.getDescription());
+        this.dailyScheduleElementProgBar.setProgress(item.getProgressFromDates(new Date(System.currentTimeMillis())));
+        this.dailyScheduleElementCheck.setChecked(item.isTaskDone());
     }
 
 
@@ -56,7 +60,14 @@ public class DailyScheduleViewHolder extends RecyclerView.ViewHolder {
      * @return string representation of time interval in format (HH:mm-HH:mm)
      */
     //TODO implement
-    private String parseTimeInterval(ScheduleListItem item) {
-        return "";
+    private String parseTimeInterval(ScheduleListItem item) throws ParseException {
+        Date firstTime = new Date();
+        int intMin = 15;
+        Date secondTime =new Date();
+        secondTime.setTime(secondTime.getTime() + 1000 * 60 * intMin);
+
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+
+        return dateFormat.format(firstTime) + "-" + dateFormat.format(secondTime);
     }
 }
