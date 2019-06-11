@@ -82,4 +82,32 @@ public class ScheduleListItemTest {
         //Then
         assertEquals(0, actualPercent);
     }
+    @Test
+    public void parseTimeInterval_03_00(){
+        //Given
+        item1.setStartTime(new Date(0));
+        item1.setEndTime(new Date(0));
+
+        //When
+       String interval = item1.parseTimeInterval();
+
+       //Then
+        assertEquals("03:00-03:00",interval);
+
+    }
+    @Test
+    public void parseTimeInterval_00_30(){
+        //Given
+        item1.setStartTime(new Date(0));
+        item1.setEndTime(new Date(1800000));
+
+        //When
+        String intervalTwo = item1.parseTimeInterval();
+
+        //Then
+        assertEquals("03:00-03:30", intervalTwo);
+
+    }
+
+
 }

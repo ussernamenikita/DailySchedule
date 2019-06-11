@@ -25,6 +25,7 @@ public class DailyScheduleViewHolder extends RecyclerView.ViewHolder {
      * Current showed item
      */
     private ScheduleListItem currentItem = null;
+    DateFormat dateFormat = new SimpleDateFormat("HH:mm");
     private TextView dailyScheduleElementTitle;
     //TODO rename all fields like  dailyScheduleElementTitle
     //for more info see(https://www.geeksforgeeks.org/java-naming-conventions/)
@@ -47,7 +48,7 @@ public class DailyScheduleViewHolder extends RecyclerView.ViewHolder {
     public void bindToItem(ScheduleListItem item) throws ParseException {
         this.currentItem = item;
         this.dailyScheduleElementTitle.setText(item.getTitle());
-        this.dailyScheduleElementBuzz.setText(parseTimeInterval(item));
+        this.dailyScheduleElementBuzz.setText(item.parseTimeInterval());
         this.dailyScheduleElementDescription.setText(item.getDescription());
         this.dailyScheduleElementProgBar.setProgress(item.getProgressFromDates(new Date(System.currentTimeMillis())));
         this.dailyScheduleElementCheck.setChecked(item.isTaskDone());
@@ -60,14 +61,6 @@ public class DailyScheduleViewHolder extends RecyclerView.ViewHolder {
      * @return string representation of time interval in format (HH:mm-HH:mm)
      */
     //TODO implement
-    private String parseTimeInterval(ScheduleListItem item) throws ParseException {
-        Date firstTime = new Date();
-        int intMin = 15;
-        Date secondTime =new Date();
-        secondTime.setTime(secondTime.getTime() + 1000 * 60 * intMin);
 
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
-        return dateFormat.format(firstTime) + "-" + dateFormat.format(secondTime);
-    }
 }

@@ -1,6 +1,10 @@
 package ru.madd.dailyschedule;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class ScheduleListItem {
 
@@ -13,6 +17,8 @@ public class ScheduleListItem {
     public String getTitle() {
         return title;
     }
+
+    DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
     public void setTitle(String title) {
         this.title = title;
@@ -60,8 +66,17 @@ public class ScheduleListItem {
      */
     //TODO implement
     public int getProgressFromDates(Date currentTime) {
+      if (startTime.after(currentTime)) return 0;
+      if (endTime.before(currentTime)) return 100;
+      long intervalDate = (endTime.getTime() - startTime.getTime());
+      long firstPercent = intervalDate / 100;
+      long intervaltoDate = (currentTime.getTime() - startTime.getTime());
+      return (int)(intervaltoDate / firstPercent);
 
+    }
 
-        return 0;
+    public String parseTimeInterval()  {
+
+            return dateFormat.format(startTime) + "-" + dateFormat.format(endTime);
     }
 }
