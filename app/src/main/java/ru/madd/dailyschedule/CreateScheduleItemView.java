@@ -1,15 +1,10 @@
 package ru.madd.dailyschedule;
 
-import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
-
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,10 +14,8 @@ public class CreateScheduleItemView {
     private final EditText startTime;
     private EditText title;
     private CreateScheduleItemPresenter presenter;
-
-    public void bindToPresenter(CreateScheduleItemPresenter presenter){
-        this.presenter = presenter;
-    }
+    private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    private Date lastStartTime;
 
 
     public CreateScheduleItemView(View rootView) {
@@ -46,6 +39,7 @@ public class CreateScheduleItemView {
         });
         startTime = rootView.findViewById(R.id.second_daily_schedule_element_minutes_ed);
         startTime.addTextChangedListener(new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -59,7 +53,8 @@ public class CreateScheduleItemView {
             @Override
             public void afterTextChanged(Editable s) {
                 try {
-                    presenter.onStartTimeChanged(startTimeFromString(s.toString()));
+                    lastStartTime = startTimeFromString(s.toString());
+                    presenter.onStartTimeChanged(lastStartTime);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -71,12 +66,24 @@ public class CreateScheduleItemView {
         //
     }
 
+    public void bindToPresenter(CreateScheduleItemPresenter presenter) {
+        this.presenter = presenter;
+    }
+
     private Date startTimeFromString(String string) throws ParseException {
         //string = "01/04/2019 00:00-00:30";
-        Date stringToDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(string);
+        return format.parse(string);
+    }
 
-        return stringToDate;
-
+    /**
+     * Function convert duratuion to end time
+     * Uses lastStartTime
+     * @param text text from edit text
+     * @return end time
+     */
+    private Date fromDurationToDate(String text){
+        int duration = ...//TODO parse text to Int
+        Date endTime = ...//TODO get and return end tim e from start time + duration
     }
 
 
