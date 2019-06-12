@@ -55,12 +55,7 @@ public class DailyScheduleViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    /**
-     * Return time interval in format HH:mm-HH:mm (first start time, second end time)
-     * @param item item which time need to convert
-     * @return string representation of time interval in format (HH:mm-HH:mm)
-     */
-    //TODO implement
+
 
 
 }
