@@ -3,19 +3,28 @@ package ru.madd.dailyschedule;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.xml.datatype.Duration;
+
 public class CreateScheduleItemView {
 
     private final EditText startTime;
     private EditText title;
     private CreateScheduleItemPresenter presenter;
-    private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private Date lastStartTime;
+    private Date lastDurationMinutes;
+    private EditText durationMinutes;
+    private Button createTask;
+
+
+    private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
 
 
     public CreateScheduleItemView(View rootView) {
@@ -37,7 +46,7 @@ public class CreateScheduleItemView {
 
             }
         });
-        startTime = rootView.findViewById(R.id.second_daily_schedule_element_minutes_ed);
+        startTime = rootView.findViewById(R.id.second_daily_schedule_element_input_start_time_ed);
         startTime.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -61,6 +70,25 @@ public class CreateScheduleItemView {
 
             }
         });
+        durationMinutes = rootView.findViewById(R.id.second_daily_schedule_element_minutes_ed);
+        durationMinutes.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                lastDurationMinutes = fromDurationToDate(s.toString());
+                presenter.onEndTimeChanged(lastDurationMinutes);
+            }
+        });
+        createTask = rootView.findViewById(R.id.second_daily_schedule_element_create_tast_b);
 
 
         //
@@ -81,9 +109,13 @@ public class CreateScheduleItemView {
      * @param text text from edit text
      * @return end time
      */
-    private Date fromDurationToDate(String text){
-        int duration = ...//TODO parse text to Int
-        Date endTime = ...//TODO get and return end tim e from start time + duration
+    private Date fromDurationToDate(String text) {
+        //text = "20";
+        long duration = Long.parseLong(text)*60*1000;
+        long longLastStartTime = lastStartTime.getTime();
+        Date endTime = new Date(longLastStartTime + duration);
+
+        return endTime;
     }
 
 
