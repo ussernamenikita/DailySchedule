@@ -110,7 +110,7 @@ public class CreateScheduleItemView {
      * @return end time
      */
     private Date fromDurationToDate(String text) {
-        //text = "20";
+        //text = "20" минуты;
         long duration = Long.parseLong(text)*60*1000;
         long longLastStartTime = lastStartTime.getTime();
         Date endTime = new Date(longLastStartTime + duration);
