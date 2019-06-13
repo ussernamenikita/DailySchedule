@@ -1,31 +1,59 @@
 package ru.madd.dailyschedule;
 
-import android.view.View;
-
 import java.util.Date;
 
 public class CreateScheduleItemPresenter {
 
 
     private CreateScheduleItemView view;
-    private ScheduleListItem model;
+    private IScheduleModel model;
+    private IScreenRouter router;
+    //TODO#5 create new ScheduleListItem
+    private ScheduleListItem newItem = ...;
 
-    public void bindToView(CreateScheduleItemView view){
+    public void bindToView(CreateScheduleItemView view) {
         this.view = view;
+        updateBtnState();
     }
 
 
-    public void onTitleChanged(String newTitle){
-        model.setTitle(newTitle);
+    private void updateBtnState() {
+        if(view != null){
+            view.setCreateTaskBtnEnabled(isAllFiledsFilled());
+        }
     }
 
-    public void onDescriptionChanged(String newDescription) {model.setDescription(newDescription);}
+    //TODO#6 Implement function
+    /**
+     * Check if all newItem's fields filled properly (!= null)
+     * @return true if all fields filled and user can create item, otherwise false
+     */
+    private boolean isAllFiledsFilled() {
+        ...
+    }
 
-    public  void onStartTimeChanged(Date newStartTime) {model.setStartTime(newStartTime);}
+    //TODO#7 call updateBtnState function in each function which change newItem
+    public void onTitleChanged(String newTitle) {
+        newItem.setTitle(newTitle);
+    }
 
-    public void onEndTimeChanged (Date newEndTime) {model.setEndTime(newEndTime);}
+    public void onDescriptionChanged(String newDescription) {
+        newItem.setDescription(newDescription);
+    }
 
-    public void onButtonClicked () {view.showProgress();}
+    public void onStartTimeChanged(Date newStartTime) {
+        newItem.setStartTime(newStartTime);
+    }
+
+    public void onEndTimeChanged(Date newEndTime) {
+        newItem.setEndTime(newEndTime);
+    }
+
+    public void onButtonClicked() {
+        view.showProgress();
+        model.addItem(newItem);
+        router.routeToScheduleList();
+    }
 
 
 }

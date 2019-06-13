@@ -5,12 +5,11 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.xml.datatype.Duration;
 
 public class CreateScheduleItemView {
 
@@ -21,10 +20,10 @@ public class CreateScheduleItemView {
     private Date lastDurationMinutes;
     private EditText durationMinutes;
     private Button createTask;
+    private ProgressBar progressBar;
 
 
     private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
 
 
     public CreateScheduleItemView(View rootView) {
@@ -89,9 +88,11 @@ public class CreateScheduleItemView {
             }
         });
         createTask = rootView.findViewById(R.id.second_daily_schedule_element_create_tast_b);
+        //TODO#1 add click listener to createTask. In listener call onButtonClicked function on presenter
 
+        //TODO#2 get progressBar from xml and set it visibility to Gone
 
-        //
+        //TODO#0 set textChangeListener to description EditText
     }
 
     public void bindToPresenter(CreateScheduleItemPresenter presenter) {
@@ -104,21 +105,36 @@ public class CreateScheduleItemView {
     }
 
     /**
-     * Function convert duratuion to end time
+     * Function convert duration to end time
      * Uses lastStartTime
      * @param text text from edit text
      * @return end time
      */
     private Date fromDurationToDate(String text) {
         //text = "20" минуты;
-        long duration = Long.parseLong(text)*60*1000;
+        long duration = Long.parseLong(text) * 60 * 1000;
         long longLastStartTime = lastStartTime.getTime();
-        Date endTime = new Date(longLastStartTime + duration);
-
-        return endTime;
+        return new Date(longLastStartTime + duration);
     }
 
 
+    //TODO#4 implement function
+    /**
+     * Enable button according to {@param enabled}
+     * If enabled == true, then btn will be enabled
+     * If enabled == false, then btn will be disabled
+     * @param enabled enabled or not
+     */
+    public void setCreateTaskBtnEnabled(boolean enabled){
+
+    }
+
+
+    //TODO#3 set progressBar visibility to VISIBLE and rest views to GONE
+    /**
+     * Show progress bar on screen,
+     * and hide all rest views
+     */
     public void showProgress() {
 
     }
