@@ -21,6 +21,7 @@ public class CreateScheduleItemView {
     private EditText durationMinutes;
     private Button createTask;
     private ProgressBar progressBar;
+    private EditText descriptionsED;
 
 
     private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -87,12 +88,38 @@ public class CreateScheduleItemView {
                 presenter.onEndTimeChanged(lastDurationMinutes);
             }
         });
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (progressBar.getVisibility() == View.GONE) progressBar.setVisibility(View.VISIBLE);
+                else progressBar.setVisibility(View.GONE);
+                presenter.onButtonClicked();
+            }
+        };
         createTask = rootView.findViewById(R.id.second_daily_schedule_element_create_tast_b);
-        //TODO#1 add click listener to createTask. In listener call onButtonClicked function on presenter
+        createTask.setOnClickListener(onClickListener);
+        progressBar = rootView.findViewById(R.id.second_daily_schedule_element_minutes_open_pB);
+        descriptionsED = rootView.findViewById(R.id.second_daily_schedule_element_description_name_ed);
+        descriptionsED.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                presenter.onDescriptionChanged(s.toString());
+
+            }
+        });
 
         //TODO#2 get progressBar from xml and set it visibility to Gone
 
-        //TODO#0 set textChangeListener to description EditText
     }
 
     public void bindToPresenter(CreateScheduleItemPresenter presenter) {
@@ -107,6 +134,7 @@ public class CreateScheduleItemView {
     /**
      * Function convert duration to end time
      * Uses lastStartTime
+     *
      * @param text text from edit text
      * @return end time
      */
@@ -119,18 +147,21 @@ public class CreateScheduleItemView {
 
 
     //TODO#4 implement function
+
     /**
      * Enable button according to {@param enabled}
      * If enabled == true, then btn will be enabled
      * If enabled == false, then btn will be disabled
+     *
      * @param enabled enabled or not
      */
-    public void setCreateTaskBtnEnabled(boolean enabled){
+    public void setCreateTaskBtnEnabled(boolean enabled) {
 
     }
 
 
     //TODO#3 set progressBar visibility to VISIBLE and rest views to GONE
+
     /**
      * Show progress bar on screen,
      * and hide all rest views
@@ -138,4 +169,7 @@ public class CreateScheduleItemView {
     public void showProgress() {
 
     }
+
+
+
 }

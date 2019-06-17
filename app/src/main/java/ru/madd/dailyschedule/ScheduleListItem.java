@@ -1,10 +1,8 @@
 package ru.madd.dailyschedule;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class ScheduleListItem {
 
@@ -56,15 +54,6 @@ public class ScheduleListItem {
         this.endTime = endTime;
     }
 
-    /**
-     * Converts time interval to progress value between 0 and 100
-     * For example if {@param currentTime} equals {@link ScheduleListItem#startTime} then return 0
-     * and if {@param currentTime} equals {@link ScheduleListItem#endTime} then return 100
-     *
-     * @param currentTime current time
-     * @return time interval progress from 0 to 100
-     */
-    //TODO implement
     public int getProgressFromDates(Date currentTime) {
       if (startTime.after(currentTime)) return 0;
       if (endTime.before(currentTime)) return 100;
