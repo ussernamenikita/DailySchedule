@@ -17,14 +17,16 @@ public class CreateScheduleItemPresenter {
 
 
     private void updateBtnState() {
-        if(view != null){
+        if (view != null) {
             view.setCreateTaskBtnEnabled(isAllFiledsFilled());
         }
     }
 
     private boolean isAllFiledsFilled() {
-       if (newItem.getDescription() != null && newItem.getTitle() != null && newItem.getStartTime() != null && newItem.getEndTime() != null ) return true;
-       else return false;
+        return newItem.getDescription() != null &&
+                newItem.getTitle() != null &&
+                newItem.getStartTime() != null &&
+                newItem.getEndTime() != null;
     }
 
     public void onTitleChanged(String newTitle) {
