@@ -27,7 +27,6 @@ public class CreateScheduleItemView {
     private TextView headerDescription;
     private TextView headerStartTime;
     private TextView headerDurationMinuters;
-    private Date presentTime = new Date();
 
 
     private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -152,41 +151,22 @@ public class CreateScheduleItemView {
     }
 
 
-
     public void setCreateTaskBtnEnabled(boolean enabled) {
-        if (enabled == true) createTask.setClickable(true);
-        else createTask.setClickable(false);
+        createTask.setClickable(enabled);
     }
-
 
 
     public void showProgress() {
-
-      if (progressBar.getVisibility() == View.GONE) {
-
-          progressBar.setVisibility(View.VISIBLE);
-          title.setVisibility(View.GONE);
-          startTime.setVisibility(View.GONE);
-          durationMinutes.setVisibility(View.GONE);
-          descriptionsED.setVisibility(View.GONE);
-          headerDurationMinuters.setVisibility(View.GONE);
-          headerStartTime.setVisibility(View.GONE);
-          headerDescription.setVisibility(View.GONE);
-          headerTitle.setVisibility(View.GONE);
-      }else {
-          progressBar.setVisibility(View.GONE);
-          title.setVisibility(View.VISIBLE);
-          startTime.setVisibility(View.VISIBLE);
-          durationMinutes.setVisibility(View.VISIBLE);
-          descriptionsED.setVisibility(View.VISIBLE);
-          headerDurationMinuters.setVisibility(View.VISIBLE);
-          headerStartTime.setVisibility(View.VISIBLE);
-          headerDescription.setVisibility(View.VISIBLE);
-          headerTitle.setVisibility(View.VISIBLE);
-      }
-
+        progressBar.setVisibility(View.VISIBLE);
+        title.setVisibility(View.GONE);
+        startTime.setVisibility(View.GONE);
+        durationMinutes.setVisibility(View.GONE);
+        descriptionsED.setVisibility(View.GONE);
+        headerDurationMinuters.setVisibility(View.GONE);
+        headerStartTime.setVisibility(View.GONE);
+        headerDescription.setVisibility(View.GONE);
+        headerTitle.setVisibility(View.GONE);
     }
-
 
 
 }
