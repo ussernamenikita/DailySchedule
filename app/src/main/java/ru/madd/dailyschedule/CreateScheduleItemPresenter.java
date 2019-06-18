@@ -8,7 +8,6 @@ public class CreateScheduleItemPresenter {
     private CreateScheduleItemView view;
     private IScheduleModel model;
     private IScreenRouter router;
-    //TODO#5 create new ScheduleListItem - ?
     private ScheduleListItem newItem = new ScheduleListItem();
 
     public void bindToView(CreateScheduleItemView view) {
@@ -23,13 +22,8 @@ public class CreateScheduleItemPresenter {
         }
     }
 
-    //TODO#6 Implement function - ?
-    /**
-     * Check if all newItem's fields filled properly (!= null)
-     * @return true if all fields filled and user can create item, otherwise false
-     */
     private boolean isAllFiledsFilled() {
-       if (newItem != null) return true;
+       if (newItem.getDescription() != null && newItem.getTitle() != null && newItem.getStartTime() != null && newItem.getEndTime() != null ) return true;
        else return false;
     }
 
