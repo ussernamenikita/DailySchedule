@@ -8,8 +8,8 @@ public class CreateScheduleItemPresenter {
     private CreateScheduleItemView view;
     private IScheduleModel model;
     private IScreenRouter router;
-    //TODO#5 create new ScheduleListItem
-    private ScheduleListItem newItem = ...;
+    //TODO#5 create new ScheduleListItem - ?
+    private ScheduleListItem newItem = new ScheduleListItem();
 
     public void bindToView(CreateScheduleItemView view) {
         this.view = view;

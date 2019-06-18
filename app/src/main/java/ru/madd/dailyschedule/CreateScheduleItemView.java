@@ -152,26 +152,14 @@ public class CreateScheduleItemView {
     }
 
 
-    //TODO#4 implement function
 
-    /**
-     * Enable button according to {@param enabled}
-     * If enabled == true, then btn will be enabled
-     * If enabled == false, then btn will be disabled
-     *
-     * @param enabled enabled or not
-     */
     public void setCreateTaskBtnEnabled(boolean enabled) {
-
+        if (enabled == true) createTask.setClickable(true);
+        else createTask.setClickable(false);
     }
 
 
-    //TODO#3 set progressBar visibility to VISIBLE and rest views to GONE
 
-    /**
-     * Show progress bar on screen,
-     * and hide all rest views
-     */
     public void showProgress() {
 
       if (progressBar.getVisibility() == View.GONE) {
