@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,12 +23,21 @@ public class CreateScheduleItemView {
     private Button createTask;
     private ProgressBar progressBar;
     private EditText descriptionsED;
+    private TextView headerTitle;
+    private TextView headerDescription;
+    private TextView headerStartTime;
+    private TextView headerDurationMinuters;
+    private Date presentTime = new Date();
 
 
     private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 
     public CreateScheduleItemView(View rootView) {
+        headerTitle = rootView.findViewById(R.id.second_daily_schedule_element_title_tv);
+        headerDescription = rootView.findViewById(R.id.second_daily_schedule_element_description_tv);
+        headerStartTime = rootView.findViewById(R.id.second_daily_schedule_element_start_time_tv);
+        headerDurationMinuters = rootView.findViewById(R.id.second_daily_schedule_element_duration_minutes_tv);
         title = rootView.findViewById(R.id.second_daily_schedule_element_type_title_ed);
         title.addTextChangedListener(new TextWatcher() {
             @Override
@@ -91,8 +101,6 @@ public class CreateScheduleItemView {
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (progressBar.getVisibility() == View.GONE) progressBar.setVisibility(View.VISIBLE);
-                else progressBar.setVisibility(View.GONE);
                 presenter.onButtonClicked();
             }
         };
@@ -117,8 +125,6 @@ public class CreateScheduleItemView {
 
             }
         });
-
-        //TODO#2 get progressBar from xml and set it visibility to Gone
 
     }
 
@@ -167,6 +173,29 @@ public class CreateScheduleItemView {
      * and hide all rest views
      */
     public void showProgress() {
+
+      if (progressBar.getVisibility() == View.GONE) {
+
+          progressBar.setVisibility(View.VISIBLE);
+          title.setVisibility(View.GONE);
+          startTime.setVisibility(View.GONE);
+          durationMinutes.setVisibility(View.GONE);
+          descriptionsED.setVisibility(View.GONE);
+          headerDurationMinuters.setVisibility(View.GONE);
+          headerStartTime.setVisibility(View.GONE);
+          headerDescription.setVisibility(View.GONE);
+          headerTitle.setVisibility(View.GONE);
+      }else {
+          progressBar.setVisibility(View.GONE);
+          title.setVisibility(View.VISIBLE);
+          startTime.setVisibility(View.VISIBLE);
+          durationMinutes.setVisibility(View.VISIBLE);
+          descriptionsED.setVisibility(View.VISIBLE);
+          headerDurationMinuters.setVisibility(View.VISIBLE);
+          headerStartTime.setVisibility(View.VISIBLE);
+          headerDescription.setVisibility(View.VISIBLE);
+          headerTitle.setVisibility(View.VISIBLE);
+      }
 
     }
 
