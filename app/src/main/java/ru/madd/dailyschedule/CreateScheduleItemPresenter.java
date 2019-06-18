@@ -23,30 +23,34 @@ public class CreateScheduleItemPresenter {
         }
     }
 
-    //TODO#6 Implement function
+    //TODO#6 Implement function - ?
     /**
      * Check if all newItem's fields filled properly (!= null)
      * @return true if all fields filled and user can create item, otherwise false
      */
     private boolean isAllFiledsFilled() {
-        ...
+       if (newItem != null) return true;
+       else return false;
     }
 
-    //TODO#7 call updateBtnState function in each function which change newItem
     public void onTitleChanged(String newTitle) {
         newItem.setTitle(newTitle);
+        updateBtnState();
     }
 
     public void onDescriptionChanged(String newDescription) {
         newItem.setDescription(newDescription);
+        updateBtnState();
     }
 
     public void onStartTimeChanged(Date newStartTime) {
         newItem.setStartTime(newStartTime);
+        updateBtnState();
     }
 
     public void onEndTimeChanged(Date newEndTime) {
         newItem.setEndTime(newEndTime);
+        updateBtnState();
     }
 
     public void onButtonClicked() {
