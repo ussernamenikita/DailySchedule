@@ -2,6 +2,10 @@ package ru.madd.dailyschedule.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -18,8 +22,8 @@ public class SchedulerModelSharedPreferencesImpl implements IScheduleModel {
     private int lastIndex;
 
     public SchedulerModelSharedPreferencesImpl(Context context) {
-        //TODO #0 Create shared preferences from context
-        this.preferences ...;
+        //TODO #0 Create shared preferences from context +
+        this.preferences = context.getSharedPreferences("AppSettingsSave",Context.MODE_PRIVATE );
         lastIndex = getLastIndex();
     }
 
@@ -69,7 +73,7 @@ public class SchedulerModelSharedPreferencesImpl implements IScheduleModel {
         putToSharedPreferences(++lastIndex, getString(item));
     }
 
-    //TODO #3
+    //TODO #3+
 
     /**
      * Save string representation of {@link ScheduleListItem} with index {@param lastIndex}
@@ -78,8 +82,11 @@ public class SchedulerModelSharedPreferencesImpl implements IScheduleModel {
      * @param string    string representation of item
      */
     private void putToSharedPreferences(int lastIndex, String string) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(String.valueOf(lastIndex),string);
+        editor.apply();
+        }
 
-    }
 
     //TODO #5
 
@@ -93,7 +100,7 @@ public class SchedulerModelSharedPreferencesImpl implements IScheduleModel {
 
     }
 
-    //TODO #2
+    //TODO #2+
 
     /**
      * Get string from item
@@ -102,11 +109,12 @@ public class SchedulerModelSharedPreferencesImpl implements IScheduleModel {
      * @return string representation of item
      */
     private String getString(ScheduleListItem item) {
-
+        Gson gson = new Gson();
+        return gson.toJson(item);
     }
 
 
-    //TODO #1
+    //TODO #1+
 
     /**
      * Parse {@link ScheduleListItem} from string
@@ -115,7 +123,9 @@ public class SchedulerModelSharedPreferencesImpl implements IScheduleModel {
      * @return parsed item
      */
     private ScheduleListItem fromString(String stringItem) {
-
+        Gson fromGson = new Gson();
+        ScheduleListItem fromObj = fromGson.fromJson(stringItem, ScheduleListItem.class);
+        return fromObj;
     }
 
 }
