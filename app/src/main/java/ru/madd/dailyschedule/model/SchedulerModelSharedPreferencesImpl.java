@@ -7,6 +7,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ru.madd.dailyschedule.IScheduleModel;
@@ -46,8 +47,8 @@ public class SchedulerModelSharedPreferencesImpl implements IScheduleModel {
      */
     @Override
     public List<ScheduleListItem> getAllItems() {
-        //TODO #4
-        List<ScheduleListItem> newList = ...;
+        //TODO #4+
+        List<ScheduleListItem> newList = new ArrayList<>();
         return getFromSharedPreferencesToList(newList);
     }
 
