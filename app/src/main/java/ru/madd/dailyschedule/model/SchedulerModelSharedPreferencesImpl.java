@@ -29,7 +29,7 @@ public class SchedulerModelSharedPreferencesImpl implements IScheduleModel {
     }
 
 
-    //TODO #6
+    //TODO #6+
 
     /**
      * Get last saved item's index from sharedPreferences
@@ -37,7 +37,7 @@ public class SchedulerModelSharedPreferencesImpl implements IScheduleModel {
      * @return index
      */
     private int getLastIndex() {
-        return 0;
+        return lastIndex;
     }
 
     /**
@@ -61,6 +61,7 @@ public class SchedulerModelSharedPreferencesImpl implements IScheduleModel {
      * @return all items from sharedPreferences
      */
     private List<ScheduleListItem> getFromSharedPreferencesToList(List<ScheduleListItem> newList) {
+
 
     }
 
@@ -89,7 +90,7 @@ public class SchedulerModelSharedPreferencesImpl implements IScheduleModel {
         }
 
 
-    //TODO #5
+    //TODO #5+
 
     /**
      * Get string representation {@link ScheduleListItem} with index {@param index} from {@link SharedPreferences}
@@ -98,7 +99,7 @@ public class SchedulerModelSharedPreferencesImpl implements IScheduleModel {
      * @return string representation of item with index
      */
     private String getFromSharedPreferences(int index) {
-
+      return preferences.getString(String.valueOf(index), null );
     }
 
     //TODO #2+
